@@ -8,8 +8,7 @@ import { useAppStore } from './store/useAppStore';
 
 export default function App() {
   const loadTasks = useAppStore((s) => s.loadTasks);
-
   useEffect(() => { void loadTasks(); }, [loadTasks]);
 
-  return <div className='app'><div className='grid' /><div className='shell'><TopBar /><div className='main'><ControlPanel /><TerminalView /><StatsPanel /></div><BottomArea /></div></div>;
+  return <div className='app'><div className='aurora' /><div className='matrix' /><div className='radar' /><div className='shell'><TopBar /><div className='main'><ControlPanel /><TerminalView /><StatsPanel /></div><BottomArea /></div></div>;
 }
