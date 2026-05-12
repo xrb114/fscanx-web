@@ -6,7 +6,7 @@ export function ControlPanel() {
   const { config, setConfig, startTask, stopTask, isRunning, error } = useAppStore();
 
   return (
-    <div className='glass panel'>
+    <div className='glass panel no-scroll'>
       <h3>任务控制台</h3>
       {!!error && <div style={{ color: '#ff5c8a', marginBottom: 8 }}>{error}</div>}
       <input className='input' placeholder='IP/CIDR/域名，如 192.168.1.0/24' value={config.target} onChange={(e) => setConfig({ target: e.target.value })} />
@@ -15,9 +15,18 @@ export function ControlPanel() {
         <input className='input' placeholder='用户名字典' value={config.userDict} onChange={(e) => setConfig({ userDict: e.target.value })} />
         <input className='input' placeholder='密码字典' value={config.passDict} onChange={(e) => setConfig({ passDict: e.target.value })} />
       </div>
-      <select className='select' multiple value={config.modules} onChange={(e) => setConfig({ modules: Array.from(e.target.selectedOptions).map((o) => o.value) })}>
-        {modules.map((m) => <option key={m}>{m}</option>)}
-      </select>
+      <div className='module-grid'>
+        {modules.map((m) => (
+          <label key={m} className={`module-pill ${config.modules.includes(m) ? 'active' : ''}`}>
+            <input
+              type='checkbox'
+              checked={config.modules.includes(m)}
+              onChange={(e) => setConfig({ modules: e.target.checked ? [...config.modules, m] : config.modules.filter((x) => x !== m) })}
+            />
+            {m}
+          </label>
+        ))}
+      </div>
       <label>线程 {config.threads}<input type='range' min='10' max='2000' value={config.threads} onChange={(e) => setConfig({ threads: +e.target.value })} /></label>
       <div className='row'>
         <input className='input' placeholder='超时(s)' value={config.timeout} onChange={(e) => setConfig({ timeout: +e.target.value || 1 })} />
