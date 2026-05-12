@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { scanApi } from '../api/client';
+import { scanApi, wsTaskUrl, API_BASE } from '../api/client';
 import type { RuntimeStats, ScanConfig, ScanTask, TimelineEvent, WsTaskMessage, TaskStatus } from '../types';
 
 interface State {
@@ -83,8 +83,7 @@ export const useAppStore = create<State>((set, get) => ({
   connectWs: (taskId: string) => {
     const old = get().ws;
     if (old) old.close();
-    const wsProto = location.protocol === 'https:' ? 'wss' : 'ws';
-    const ws = new WebSocket(`${wsProto}://${location.host}/ws/task/${taskId}`);
+    const ws = new WebSocket(wsTaskUrl(taskId));
 
     ws.onopen = () => set((s) => ({ timeline: [{ ts: new Date().toISOString(), type: 'info', message: `WebSocket 已连接: ${taskId}` }, ...s.timeline], error: undefined }));
     ws.onmessage = (event) => {
@@ -102,7 +101,7 @@ export const useAppStore = create<State>((set, get) => ({
         get().appendLog(String(event.data));
       }
     };
-    ws.onerror = () => set({ error: 'WebSocket 连接失败，请检查 /ws/task/:id 是否可用。' });
+    ws.onerror = () => set({ error: `WebSocket 连接失败，请检查后端地址。当前 API_BASE=${API_BASE || '(same-origin)'}` });
     ws.onclose = () => set((s) => ({ ws: undefined, timeline: [{ ts: new Date().toISOString(), type: 'warn', message: `WebSocket 已断开: ${taskId}` }, ...s.timeline] }));
 
     set({ ws, activeTaskId: taskId });
