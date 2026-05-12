@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+:root{--bg:#03040A;--bg2:#0B1020;--cyan:#00F5FF;--blue:#009DFF;--purple:#8B5CF6;--mag:#FF00E5;--green:#00FFB2;--warn:#FFC857;--danger:#FF3B5C}
+*{box-sizing:border-box}body{margin:0;font-family:Rajdhani,sans-serif;color:#d8eeff;background:radial-gradient(circle at 15% 10%,#0b1533 0,#03040A 40%,#03040A 100%);overflow:hidden}
+.app{height:100vh;position:relative}.aurora,.matrix,.radar{position:absolute;inset:0;pointer-events:none}
+.aurora{background:radial-gradient(circle at 20% 30%,rgba(0,245,255,.2),transparent 30%),radial-gradient(circle at 80% 60%,rgba(139,92,246,.2),transparent 35%),radial-gradient(circle at 50% 70%,rgba(255,0,229,.12),transparent 30%);filter:blur(10px);animation:float 8s ease-in-out infinite alternate}
+.matrix{background-image:linear-gradient(rgba(0,245,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,157,255,.08) 1px,transparent 1px);background-size:36px 36px;opacity:.25}
+.radar{background:conic-gradient(from 0deg at 80% 75%,rgba(0,255,178,.2),transparent 15%,transparent 65%,rgba(0,255,178,.18));mask:radial-gradient(circle at 80% 75%,black 0,transparent 45%);animation:spin 5s linear infinite}
+.shell{position:relative;z-index:2;height:100%;display:grid;grid-template-rows:72px 1fr 230px;gap:12px;padding:12px}
+.glass{background:linear-gradient(180deg,rgba(7,11,20,.7),rgba(3,4,10,.6));border:1px solid rgba(0,245,255,.35);backdrop-filter:blur(12px);box-shadow:0 0 24px rgba(0,157,255,.25),inset 0 0 30px rgba(0,245,255,.08);border-radius:20px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:0 16px}.top b{font-family:Orbitron;font-size:24px;letter-spacing:2px;text-shadow:0 0 12px var(--cyan)}
+.row{display:flex;gap:8px;align-items:center}.badge{border:1px solid var(--green);color:var(--green);padding:4px 10px;border-radius:999px;box-shadow:0 0 10px rgba(0,255,178,.5)}
+.main{display:grid;grid-template-columns:320px 1fr 340px;gap:12px;min-height:0}.panel{padding:14px;overflow:auto}.term{padding:8px;position:relative}.term:after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(255,255,255,.03) 50%);background-size:100% 4px;pointer-events:none}
+.input,.select{width:100%;border-radius:12px;border:1px solid rgba(0,157,255,.35);background:rgba(3,8,16,.8);padding:10px;color:#ddf4ff}.btn{width:100%;border:none;border-radius:14px;padding:12px;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple));font-weight:800;cursor:pointer;box-shadow:0 0 30px rgba(0,245,255,.45);animation:pulse 1.6s infinite}
+.kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.kpi>div{border:1px solid rgba(139,92,246,.4);border-radius:14px;padding:10px;background:rgba(11,16,32,.45)}.kpi small{color:#8ab8d8}
+.tabs{display:flex;gap:8px;padding:10px}.tab{padding:7px 12px;border-radius:999px;border:1px solid rgba(0,245,255,.3)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes float{to{transform:translateY(-8px)}}
+
+.no-scroll{overflow:hidden}.no-scroll::-webkit-scrollbar{display:none}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.module-pill{display:flex;align-items:center;gap:6px;padding:8px;border:1px solid rgba(0,157,255,.35);border-radius:12px;background:rgba(3,8,16,.6);font-size:14px}.module-pill input{accent-color:#00F5FF}.module-pill.active{box-shadow:0 0 14px rgba(0,245,255,.35);border-color:#00F5FF}
+.chart-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 12px 12px}.chart-card{border:1px solid rgba(0,245,255,.25);border-radius:14px;padding:8px;background:rgba(3,8,16,.45)}.chart-card h4{margin:4px 0 8px;font-family:Orbitron;font-size:13px;color:#9ce8ff}.chart-card svg{width:100%;height:120px}
+.bars{display:flex;gap:10px;align-items:flex-end;height:120px}.bars>div{flex:1;text-align:center}.bars span{display:block;font-size:12px;color:#9dd}.bars i{display:block;width:100%;background:linear-gradient(180deg,#00F5FF,#8B5CF6);border-radius:8px 8px 2px 2px;height:40%}
+.xterm-viewport{overflow:hidden !important}
