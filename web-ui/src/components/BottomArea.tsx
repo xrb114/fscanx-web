@@ -1,0 +1,1 @@
+export function BottomArea(){const tabs=['Hosts','Ports','Services','Websites','Vulnerabilities','Credentials','Timeline'];return <div className='glass'><div className='tabs'>{tabs.map(t=><div className='tab' key={t}>{t}</div>)}</div><div style={{padding:'0 12px'}}>图表区（折线/饼图/柱状/雷达）+ 主机详情抽屉 + 全局搜索 + 通知 + 导出(JSON/CSV/HTML/PDF)</div></div>}
