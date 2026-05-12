@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"time"
 
 	"github.com/killmonday/fscanx/Plugins"
@@ -10,6 +11,13 @@ import (
 )
 
 func main() {
+	for _, arg := range os.Args[1:] {
+		if arg == "--web" {
+			startWebServer()
+			return
+		}
+	}
+
 	//go func() {
 	//	http.ListenAndServe("localhost:6060", nil)
 	//}()
