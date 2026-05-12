@@ -3,11 +3,12 @@ import { useAppStore } from '../store/useAppStore';
 const modules = ['主机发现', '端口扫描', '服务识别', 'Web 指纹', '漏洞检测', '弱口令爆破'];
 
 export function ControlPanel() {
-  const { config, setConfig, startTask, stopTask, isRunning } = useAppStore();
+  const { config, setConfig, startTask, stopTask, isRunning, error } = useAppStore();
 
   return (
     <div className='glass panel'>
       <h3>任务控制台</h3>
+      {!!error && <div style={{ color: '#ff5c8a', marginBottom: 8 }}>{error}</div>}
       <input className='input' placeholder='IP/CIDR/域名，如 192.168.1.0/24' value={config.target} onChange={(e) => setConfig({ target: e.target.value })} />
       <input className='input' placeholder='端口，如 80,443,22,3389' value={config.ports} onChange={(e) => setConfig({ ports: e.target.value })} />
       <div className='row'>
@@ -23,8 +24,8 @@ export function ControlPanel() {
         <input className='input' placeholder='代理 socks5://127.0.0.1:1080' value={config.proxy} onChange={(e) => setConfig({ proxy: e.target.value })} />
       </div>
       <div className='row'>
-        <button className='btn' disabled={isRunning} onClick={() => void startTask()}>{isRunning ? '扫描中...' : '开始扫描'}</button>
-        <button className='input' disabled={!isRunning} onClick={() => void stopTask()}>停止</button>
+        <button className='btn' disabled={isRunning} onClick={() => void startTask().catch((e) => useAppStore.setState({ error: `启动失败: ${String(e)}` }))}>{isRunning ? '扫描中...' : '开始扫描'}</button>
+        <button className='input' disabled={!isRunning} onClick={() => void stopTask().catch((e) => useAppStore.setState({ error: `停止失败: ${String(e)}` }))}>停止</button>
       </div>
     </div>
   );
